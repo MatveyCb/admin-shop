@@ -14,13 +14,15 @@
                 Admin shoppo
             </h2>
 
-            <input type="text" placeholder="Your login">
+            <input required type="text" placeholder="Your login" id="login">
+            <input required type="text" placeholder="Your password" id="password">
 
-            <input type="text" placeholder="Your password">
+            <p style="color: red; display: none;">Не вірний логін або пароль!</p>
 
             <button class="btn">Enter</button>
-
         </form>
     </main>
+
+    <script src="./script/home.JS" type="module"></script>
 </body>
 </html>

@@ -1,6 +1,13 @@
 import { getData } from "../services/services.JS";
 
 let commentsList = document.querySelector("tbody")
+let logoutBtn = document.querySelector("#logout-btn")
+
+logoutBtn.addEventListener("click", () => {
+    localStorage.clear()
+    location.pathname = "/"
+})
+
 
 getData("comments").then(data => {
     renderData(data)

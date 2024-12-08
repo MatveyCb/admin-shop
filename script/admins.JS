@@ -1,6 +1,12 @@
 import { getData } from "../services/services.JS";
 
 let adminList = document.querySelector("tbody")
+let logoutBtn = document.querySelector("#logout-btn")
+
+logoutBtn.addEventListener("click", () => {
+    localStorage.clear()
+    location.pathname = "/"
+})
 
 getData("moderators", "admin").then(data => {
     renderData(data)

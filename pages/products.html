@@ -10,6 +10,13 @@
 </head>
 
 <body>
+
+    <div class="loader">
+        <div class="loader-spinner">
+            <img src="../img/loader.svg" alt="">
+        </div>
+    </div>
+
     <div class="root">
         <nav>
             <div class="nav-main">
@@ -21,7 +28,7 @@
                 <a href="./admins.html">Moderators</a>
             </div>
 
-            <button>Log out</button>
+            <button id="logout-btn">Log out</button>
         </nav>
         <main>
             <h1>
@@ -131,7 +138,8 @@
             </div>
         </main>
     </div>
-
+    <script src="../services/checkRole.JS"></script>
+    <script src="../services/verify.JS" type="module"></script>
     <script src="../script/products.JS" type="module"></script>
 </body>
 
