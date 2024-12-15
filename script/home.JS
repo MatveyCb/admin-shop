@@ -7,7 +7,7 @@ if (savedUres) {
         let exModer = data.find(el => el.login === savedUres.login && el.password === savedUres.password)
 
         if (exModer) {
-            location.pathname = "/pages/product.html"
+            location.pathname = "/pages/products.html"
         }
     })
 } else {
