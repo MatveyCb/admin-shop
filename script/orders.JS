@@ -1,4 +1,4 @@
-import { getData } from "../services/services.JS";
+import { getData, deleteData } from "../services/services.JS";
 
 let orderList = document.querySelector("tbody")
 let logoutBtn = document.querySelector("#logout-btn")
@@ -26,7 +26,24 @@ function renderData(array) {
                             <td>${order.cost}</td>
 
                             <td>
-                                <button class="dlt">
+                                <select>
+                                <option value="waiting">
+                                    waiting
+                                    </option>
+
+                                    <option value="deliveting">
+                                    delivering
+                                    </option>
+
+                                    <option value="success">
+                                    success
+                                    </option>
+
+                                    <option value="canceled">
+                                    canseled
+                                    </option>
+                                </select>
+                            <button class="dlt" data-id =${order.id}>
                                     delete
                                 </button>
                             </td>
@@ -35,3 +52,14 @@ function renderData(array) {
 
     });
 }
+
+orderList.addEventListener("click", (e) => {
+    let delBtn = e.target.closest(".dlt")
+
+    if (delBtn && confirm("This order will be deleted")) {
+        let orderId = delBtn.dataset.id
+
+        deleteData("orders/" + orderId, "admin")
+            .then(() => location.reload())
+    }
+})

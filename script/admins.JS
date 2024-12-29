@@ -1,4 +1,5 @@
-import { getData } from "../services/services.JS";
+import { getData, deleteData } from "../services/services.JS";
+
 
 let adminList = document.querySelector("tbody")
 let logoutBtn = document.querySelector("#logout-btn")
@@ -25,7 +26,7 @@ function renderData(array) {
                             <td>${admin.role}</td>
 
                             <td>
-                                <button class="dlt">
+                                <button class="dlt" data-id=${admin.id}>
                                     delete
                                 </button>
                             </td>
@@ -34,3 +35,13 @@ function renderData(array) {
 
     });
 }
+adminList.addEventListener("click", (e) => {
+    let delBtn = e.target.closest(".dlt")
+
+    if (delBtn && confirm("This admin will be deleted")) {
+        let adminId = delBtn.dataset.id
+
+        deleteData("moderators/" + adminId,"admin")
+            .then(() => location.reload())
+    }
+})

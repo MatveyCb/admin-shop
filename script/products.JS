@@ -1,4 +1,4 @@
-import { getData } from "../services/services.JS";
+import { getData, deleteData } from "../services/services.JS";
 
 let prodList = document.querySelector(".list")
 let logoutBtn = document.querySelector("#logout-btn")
@@ -39,7 +39,7 @@ function renderData(array) {
                             <button class="btn edit-btn">
                                 Edit
                             </button>
-                            <button class="btn delete-btn">
+                            <button class="btn delete-btn" data-id=${prod.id}>
                                 Delete
                             </button>
                         </div>
@@ -49,3 +49,13 @@ function renderData(array) {
 
     });
 }
+    prodList.addEventListener("click", (e) => {
+    let delBtn = e.target.closest(".delete-btn")
+
+    if (delBtn && confirm("This product will be deleted")) {
+        let prodId = delBtn.dataset.id
+
+        deleteData("products/" + prodId)
+            .then(() => location.reload())
+    }
+})

@@ -1,4 +1,5 @@
-import { getData } from "../services/services.JS";
+import { getData, deleteData } from "../services/services.JS";
+import convertData from "../services/utils.js";
 
 let commentsList = document.querySelector("tbody")
 let logoutBtn = document.querySelector("#logout-btn")
@@ -16,17 +17,17 @@ getData("comments").then(data => {
 function renderData(array) {
     commentsList.innerHTML = ""
 
-        array.forEach(comment => {
-            commentsList.innerHTML += `
+    array.forEach(comment => {
+        commentsList.innerHTML += `
              <tr>
                             <td>${comment.title}</td>
                             <td>
                                 <div>${comment.text}</div>
                             </td>
                             <td> ${comment.author}</td>
-                            <td>${comment.date}</td>
+                            <td>${convertData(comment.date)}</td>
                             <td>
-                                <button class="dlt">
+                                <button class="dlt" data-id="${comment.id}">
                                     delete
                                 </button>
                             </td>
@@ -35,3 +36,14 @@ function renderData(array) {
 
     });
 }
+
+commentsList.addEventListener("click", (e) => {
+    let delBtn = e.target.closest(".dlt")
+
+    if (delBtn && confirm("This comment will be deleted")) {
+        let commentId = delBtn.dataset.id
+
+        deleteData("comments/" + commentId)
+            .then(() => location.reload())
+    }
+})
